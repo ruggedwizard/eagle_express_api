@@ -1,0 +1,6 @@
+/venv/
+/migrations/
+base_app/__pycache__/
+express/__pycache__/
+express/migrations/
+db.sqlite3
