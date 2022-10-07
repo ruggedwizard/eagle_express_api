@@ -5,10 +5,8 @@ from rest_framework import status
 from express.permisions import IsOwnerOrReadOnly
 from express.serializers import LogoutSerializer, ParcelPickupSerializer, ParkSerializer, PatnerSerializer, ParcelSerializer, RegisterSerializer, UserSerializer
 from express.models import ParcelPickup, Park,Partner,Parcel
-from express.emails import send_email
+from express.emails import send_email, update_email
 from django.contrib.auth.models import User
-from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
-from drf_spectacular.types import OpenApiTypes
 from drf_yasg.utils import swagger_auto_schema
 
 
@@ -27,9 +25,11 @@ def parcel_package(request):
     
     elif request.method == 'POST':
         data = request.data
+        email = data['email']
         serializer = ParcelPickupSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
+            send_email(email=email)
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
@@ -75,9 +75,11 @@ def partners_list(request):
     
     elif request.method == 'POST':
         data = request.data
+        email = data['email']
         serializer = PatnerSerializer(data=data)
         if serializer.is_valid():
             serializer.save(creator=request.user)
+            send_email(email=email)
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
@@ -123,9 +125,18 @@ def parcel_track(request):
     
     elif request.method == 'POST':
        parcel = request.data
+       email = parcel['parcel']['email']
+       parcel_status = parcel['parcel_status']
+       riders_contact = parcel['riders_contact']
+
+       print(parcel)
+    
+    
        serializer = ParcelSerializer(data=parcel)
        if serializer.is_valid():
             serializer.save()
+            tracking_id = serializer.data['tracking_id']
+            update_email(email=email,parcel_status=parcel_status,parcel_location=parcel_status,riders_conatct=riders_contact,tracking_id=tracking_id)
             return Response(serializer.data,status=status.HTTP_201_CREATED)
        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
@@ -137,7 +148,7 @@ def parcel_track_detail(request,pk):
     GET A SINGLE PARCEL STATUS, UPDATE AND DELETE A PARCEL
     """
     try:
-        parcel = Parcel.objects.get(pk=pk)
+        parcel = Parcel.objects.get(tracking_id=pk)
     except Parcel.DoesNotExist:
         return Response({"message":"Parcel Does Not Exist"},status=status.HTTP_404_NOT_FOUND)
     

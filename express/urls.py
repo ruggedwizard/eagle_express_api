@@ -15,7 +15,7 @@ urlpatterns = [
     path("users/",views.user_list),
     path("users/<int:pk>",views.user_detail),
     path("parks/",views.parks),
-    path("parks/<int:pk>/",views.parks_detail),
+    path("parks/<str:pk>/",views.parks_detail),
     path("register/",views.register_view),
     path("logout/",views.logout_view)
 ]

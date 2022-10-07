@@ -82,7 +82,7 @@ class Parcel(models.Model):
         ('RECEIVED FOR DELIEVRY', 'RECEIVED FOR DELIVERY')
     )
 
-    tracking_id = models.UUIDField(default=uuid.uuid4,editable=False,primary_key=True)
+    tracking_id = models.UUIDField(default=uuid.uuid4,editable=False)
     parcel = models.ForeignKey(ParcelPickup,on_delete=models.CASCADE)
     current_location = models.ForeignKey(Park,on_delete=models.CASCADE, help_text="Indicate your current Park Location")
     riders_contact = models.CharField(max_length=200,null=False,blank=False,help_text="Please Add a Rider Conatct")
