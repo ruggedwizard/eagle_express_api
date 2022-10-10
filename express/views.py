@@ -140,6 +140,8 @@ def parcel_track(request):
             return Response(serializer.data,status=status.HTTP_201_CREATED)
        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
+
+@swagger_auto_schema(method ='PUT',request_body=ParcelSerializer)
 @api_view(['GET','PUT','DELETE'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 # @authentication_classes([SessionAuthentication, BasicAuthentication])
@@ -195,6 +197,8 @@ def user_detail(request,pk):
 
 
 
+
+@swagger_auto_schema(method='POST',request_body=ParkSerializer)
 @api_view(['GET','POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def parks(request):
@@ -215,6 +219,7 @@ def parks(request):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(method='PUT',request_body=ParkSerializer)
 @api_view(['GET','PUT','DELETE'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def parks_detail(request,pk):
@@ -242,6 +247,7 @@ def parks_detail(request,pk):
         return Response({"message":"Park Deleted Successfully"},status=status.HTTP_204_NO_CONTENT)
         
 
+@swagger_auto_schema(method='POST',request_body=RegisterSerializer)
 @api_view(['POST'])
 def register_view(request):
     if request.method == 'POST':
@@ -252,7 +258,7 @@ def register_view(request):
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
 
-
+@swagger_auto_schema(method='POST',request_body=LogoutSerializer)
 @api_view(['POST'])
 def logout_view(request):
     if request.method == 'POST':
