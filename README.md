@@ -11,5 +11,5 @@ Eagle Express API is a project for logistics service:
  # Tools: 
  Django Rest Framwork, Swagger(DRF_Yasg) for Documenting the API, Oauth_2 for authentication
  
- # Link to the Live api (click_here)
+ # Link to the Live api https://eagle-express.herokuapp.com/swagger/
  
