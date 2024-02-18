@@ -117,9 +117,9 @@ TEMPLATES = [
 DATABASES = {
     'default':{
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'verceldb',
-        'USER':'default',
-        'PASSWORD':'hbtqBUf2lME1',
+        'NAME':'emperor',
+        'USER':'emperor_user',
+        'PASSWORD':'iJss3KWZ0uxpZVGUplwrg8VHKXXPrJ42',
         'HOST':'ep-autumn-math-75513108-pooler.us-east-1.postgres.vercel-storage.com',
         'PORT':'5432'
     }
