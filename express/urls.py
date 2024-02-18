@@ -6,6 +6,7 @@ from . import views
 
 
 urlpatterns = [ 
+    path('',views.index_route),
     path("parcels-pickup/",views.parcel_package),
     path("parcels-pickup/<int:pk>/",views.parcel_detail),
     path("partners/",views.partners_list),
