@@ -14,9 +14,10 @@ Logistics company can register to partner with each other i.e. a logistic compan
 
 ### RUNNING THE CODE
 ```
- CLONE THE REPOSITORY AND SETUP A VIRTUAL ENVIRONMENT TO RUN THE PROJECT, LIVE API AT 
+ CLONE THE REPOSITORY AND SETUP A VIRTUAL ENVIRONMENT TO RUN THE PROJECT, 
 
 ```
+LIVE API AT <a href="https://eagle-express-api.vercel.app/"> HERE</a>
 ## API USEAGE
 
 A SWAGGER UI is also added at {{BASE_URL}}/swagger
